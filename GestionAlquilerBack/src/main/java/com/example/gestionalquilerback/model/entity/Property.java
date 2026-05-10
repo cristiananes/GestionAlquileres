@@ -1,5 +1,7 @@
 package com.example.gestionalquilerback.model.entity;
 
+import com.example.gestionalquilerback.model.enums.PropertyCondition;
+import com.example.gestionalquilerback.model.enums.PropertyType;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,12 +19,31 @@ public class Property {
     @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false)
     private String address;
 
-    private String description;
+    private String city;
 
-    @Column(precision = 10, scale = 2)
-    private BigDecimal monthlyRent;
+    @Enumerated(EnumType.STRING)
+    private PropertyType propertyType;
+
+    @Column(precision = 8, scale = 2)
+    private BigDecimal areaM2;
+
+    private Integer bedrooms;
+
+    private Integer bathrooms;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "property_condition")
+    private PropertyCondition condition;
+
+    private Boolean hasElevator;
+
+    private Boolean hasParking;
+
+    @Column(columnDefinition = "TEXT")
+    private String description;
 
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
